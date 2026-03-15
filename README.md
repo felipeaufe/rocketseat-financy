@@ -1,90 +1,68 @@
 # Financy
 
-Aplicacao de gerenciamento financeiro dividida em duas partes:
+Projeto full stack para gerenciamento financeiro com API GraphQL (backend) e aplicacao React (frontend).
 
-- `backend`: API GraphQL para autenticacao, categorias e transacoes
-- `frontend`: interface React para consumo da API
+## Estrutura do projeto
 
-## Funcionalidades e Regras
+- `backend/`: API GraphQL para autenticacao, usuarios, categorias e transacoes
+- `frontend/`: interface React para consumo da API e gerenciamento dos dados
 
-Assim como na API, temos as seguintes funcionalidades e regras:
+## Funcionalidades e Regras (Desafio)
 
-- [x] O usuario pode criar uma conta e fazer login
-- [x] O usuario pode ver e gerenciar apenas as transacoes e categorias criadas por ele
-- [x] Deve ser possivel criar uma transacao
-- [x] Deve ser possivel deletar uma transacao
-- [x] Deve ser possivel editar uma transacao
-- [x] Deve ser possivel listar todas as transacoes
-- [x] Deve ser possivel criar uma categoria
-- [x] Deve ser possivel deletar uma categoria
-- [x] Deve ser possivel editar uma categoria
-- [x] Deve ser possivel listar todas as categorias
+- [ ] O usuario pode criar uma conta e fazer login
+- [ ] O usuario pode ver e gerenciar apenas as transacoes e categorias criadas por ele
+- [ ] Deve ser possivel criar uma transacao
+- [ ] Deve ser possivel deletar uma transacao
+- [ ] Deve ser possivel editar uma transacao
+- [ ] Deve ser possivel listar todas as transacoes
+- [ ] Deve ser possivel criar uma categoria
+- [ ] Deve ser possivel deletar uma categoria
+- [ ] Deve ser possivel editar uma categoria
+- [ ] Deve ser possivel listar todas as categorias
 
-Regras importantes do front-end:
+## Tecnologias obrigatorias do desafio
 
-- [x] Aplicacao React usando GraphQL para consultas na API e Vite como bundler
-- [x] Interface implementada conforme o desafio proposto
+- Backend: TypeScript, GraphQL, Prisma e SQLite
+- Frontend: TypeScript, React, Vite (sem framework) e GraphQL
 
-## Paginas
+## Paginas previstas no frontend
 
-A aplicacao possui as seguintes paginas:
+- `/`: exibe login quando deslogado e dashboard quando logado
+- `/auth/register`
+- `/dashboard`
+- `/transaction`
+- `/category`
+- `/profile`
 
-- `/`:
-  - Tela de login quando o usuario esta deslogado
-  - Dashboard quando o usuario esta logado
-- `/auth/register`: cadastro
-- `/dashboard`: visao geral
-- `/transaction`: gestao de transacoes
-- `/category`: gestao de categorias
-- `/profile`: perfil do usuario
+## Como executar
 
-## Ferramentas
+1. Configure os arquivos `.env` em `backend` e `frontend` com base nos `.env.example`.
+2. Instale dependencias em cada app:
 
-Obrigatorias e utilizadas no projeto:
+```bash
+cd backend
+pnpm install
 
-- TypeScript
-- React
-- Vite
-- GraphQL
-
-Bibliotecas adotadas:
-
-- Apollo Client
-- Tailwind CSS
-- shadcn/ui
-- Zustand
-
-## Estrutura
-
-```text
-backend/
-frontend/
+cd ../frontend
+pnpm install
 ```
 
-## Scripts
+3. Em terminais separados, suba backend e frontend:
 
-### Frontend
+```bash
+# backend
+cd backend
+pnpm dev
 
-- `pnpm dev`: inicia servidor de desenvolvimento
-- `pnpm build`: gera build de producao
-- `pnpm preview`: serve o build localmente
-- `pnpm format`: formata arquivos em `src`
+# frontend
+cd frontend
+pnpm dev
+```
 
-### Backend
+4. Acesse `http://localhost:5173`.
 
-- `pnpm dev`: inicia API em modo watch
-- `pnpm prisma`: gera cliente Prisma
-- `pnpm format`: formata arquivos em `src`
+## Referencias
 
-## Fluxo de uso
-
-1. Acesse `http://localhost:5173`
-2. Crie uma conta ou faca login
-3. Cadastre categorias
-4. Cadastre, edite, liste e exclua transacoes
-5. Gerencie apenas seus proprios dados
-
-## Dicas
-
-- Inicie o backend antes do frontend para evitar erro de conexao GraphQL.
-- Se houver erro de autenticacao, faca logout e login novamente para renovar o token.
+- README do backend: `backend/README.md`
+- README do frontend: `frontend/README.md`
+- Desafio oficial: https://efficient-sloth-d85.notion.site/Desafio-Fase-3-Financy-2ca395da5770806ba9c5fba5cc3f681a
