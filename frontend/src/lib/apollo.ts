@@ -1,0 +1,38 @@
+import { HttpLink } from '@apollo/client/link/http'
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client'
+import { CombinedGraphQLErrors } from '@apollo/client/errors'
+import { ErrorLink } from '@apollo/client/link/error'
+import { SetContextLink } from '@apollo/client/link/context'
+import { useAuthStore } from '@/stores/auth'
+
+const httpLink = new HttpLink({
+  uri: import.meta.env.VITE_GRAPHQL_HTTP_URL,
+})
+
+const authLink = new SetContextLink((prevContext) => {
+  const token = useAuthStore.getState().token
+  return {
+    headers: {
+      ...prevContext.headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  }
+})
+
+const errorLink = new ErrorLink(({ error }) => {
+  if (CombinedGraphQLErrors.is(error)) {
+    const hasAuthError = error.errors.some(
+      (err) =>
+        err.message === 'Not authenticated' ||
+        err.extensions?.code === 'UNAUTHENTICATED',
+    )
+    if (hasAuthError) {
+      useAuthStore.getState().logout()
+    }
+  }
+})
+
+export const apolloClient = new ApolloClient({
+  link: ApolloLink.from([errorLink, authLink, httpLink]),
+  cache: new InMemoryCache(),
+})
